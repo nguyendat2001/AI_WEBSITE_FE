@@ -13,23 +13,23 @@ const routes = [
         name: "register",
         component: () => import("@/views/auths/register.vue"),
     },
-    // {
-    //     path: "/admin",
-    //     component: () => import("@/views/Admin/admin.vue"),
-    //     children: [
-    //         {
-    //             path: "/admin/product/:id",
-    //             name: "admin.product.edit",
-    //             component: () => import("@/views/Admin/components/editProduct.vue"),
-    //             props: true
-    //         },
-    //         {
-    //             path: "/admin/user",
-    //             name: "admin.user",
-    //             component: () => import("@/views/Admin/components/user.vue"),
-    //         },
-    //     ],
-    // },
+    {
+        path: "/home",
+        component: () => import("@/views/pages/home.vue"),
+        children: [
+            // {
+            //     path: "/admin/product/:id",
+            //     name: "admin.product.edit",
+            //     component: () => import("@/views/Admin/components/editProduct.vue"),
+            //     props: true
+            // },
+            // {
+            //     path: "/admin/user",
+            //     name: "admin.user",
+            //     component: () => import("@/views/Admin/components/user.vue"),
+            // },
+        ],
+    },
 
     // {
     //     path: "/:pathMatch(.*)*",
