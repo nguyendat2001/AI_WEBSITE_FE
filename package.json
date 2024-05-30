@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@canvasjs/vue-charts": "^1.0.4",
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
     "ite": "^0.0.1",
