@@ -154,7 +154,6 @@
                   <!-- Line Chart -->
                   <div id="reportsChart"></div>
                   <form class="row g-3">
-                    
                     <div class="col-md-2">
                       <input type="text" class="form-control" placeholder="Zip" />
                     </div>
@@ -223,65 +222,11 @@
 
                 <div class="card-body">
                   <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                        <td>$64</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td>
-                          <a href="#" class="text-primary"
-                            >Blanditiis dolor omnis similique</a
-                          >
-                        </td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td>
-                          <a href="#" class="text-primary">At recusandae consectetur</a>
-                        </td>
-                        <td>$147</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td>
-                          <a href="#" class="text-primar">Ut voluptatem id earum et</a>
-                        </td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td>
-                          <a href="#" class="text-primary">Sunt similique distinctio</a>
-                        </td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <CanvasJSChart
+                    :options="options"
+                    :style="styleOptions"
+                    @chart-ref="chartInstance"
+                  />
                 </div>
               </div>
             </div>
@@ -398,40 +343,25 @@
         <div class="col-lg-4">
           <!-- Recent Activity -->
           <div>
-              <div class="card info-card revenue-card">
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"
-                    ><i class="bi bi-three-dots"></i
-                  ></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+            <div class="card info-card revenue-card">
+              <div class="card-body d-flex justify-content-center">
+                <h5 class="card-title">Revenue <span>| This Month</span></h5>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div
-                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                    >
-                      <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>$3,264</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span>
-                      <span class="text-muted small pt-2 ps-1">increase</span>
-                    </div>
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                    <i class="bi bi-currency-dollar"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>$3,264</h6>
+                    <span class="text-success small pt-1 fw-bold">8%</span>
+                    <span class="text-muted small pt-2 ps-1">increase</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           <!-- End Recent Activity -->
 
           <!-- Budget Report -->
@@ -454,7 +384,87 @@
             <div class="card-body pb-0">
               <h5 class="card-title">Budget Report <span>| This Month</span></h5>
 
-              <div id="budgetChart" style="min-height: 400px" class="echart"></div>
+                              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                  <li class="dropdown-header">
+                    You have 3 new messages
+                    <a href="#"
+                      ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                        >View all</span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+
+                  <li class="message-item">
+                    <a href="#">
+                      <img
+                        src="/assets/img/messages-1.jpg"
+                        alt=""
+                        class="rounded-circle"
+                      />
+                      <div>
+                        <h4>Maria Hudson</h4>
+                        <p>
+                          Velit asperiores et ducimus soluta repudiandae labore officia
+                          est ut...
+                        </p>
+                        <p>4 hrs. ago</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+
+                  <li class="message-item">
+                    <a href="#">
+                      <img
+                        src="/assets/img/messages-2.jpg"
+                        alt=""
+                        class="rounded-circle"
+                      />
+                      <div>
+                        <h4>Anna Nelson</h4>
+                        <p>
+                          Velit asperiores et ducimus soluta repudiandae labore officia
+                          est ut...
+                        </p>
+                        <p>6 hrs. ago</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+
+                  <li class="message-item">
+                    <a href="#">
+                      <img
+                        src="/assets/img/messages-3.jpg"
+                        alt=""
+                        class="rounded-circle"
+                      />
+                      <div>
+                        <h4>David Muldon</h4>
+                        <p>
+                          Velit asperiores et ducimus soluta repudiandae labore officia
+                          est ut...
+                        </p>
+                        <p>8 hrs. ago</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+
+                  <li class="dropdown-footer">
+                    <a href="#">Show all messages</a>
+                  </li>
+                </ul>
+              <!-- End Messages Nav -->
             </div>
           </div>
           <!-- End Budget Report -->
@@ -483,77 +493,6 @@
             </div>
           </div>
           <!-- End Website Traffic -->
-
-          <!-- News & Updates Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"
-                ><i class="bi bi-three-dots"></i
-              ></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="/assets/img/news-1.jpg" alt="" />
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>
-                    Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut
-                    harum...
-                  </p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="/assets/img/news-2.jpg" alt="" />
-                  <h4><a href="#">Quidem autem et impedit</a></h4>
-                  <p>
-                    Illo nemo neque maiores vitae officiis cum eum turos elan dries werona
-                    nande...
-                  </p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="/assets/img/news-3.jpg" alt="" />
-                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <p>
-                    Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et
-                    totam...
-                  </p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="/assets/img/news-4.jpg" alt="" />
-                  <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                  <p>
-                    Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum
-                    cuder...
-                  </p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="/assets/img/news-5.jpg" alt="" />
-                  <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <p>
-                    Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae
-                    dignissimos eius...
-                  </p>
-                </div>
-              </div>
-              <!-- End sidebar recent posts-->
-            </div>
-          </div>
-          <!-- End News & Updates -->
         </div>
         <!-- End Right side columns -->
       </div>
@@ -561,3 +500,61 @@
   </main>
   <!-- End #main -->
 </template>
+
+<script>
+import * as $ from "jquery";
+export default {
+  data() {
+    return {
+      chart: null,
+      options: {
+        animationEnabled: true,
+        exportEnabled: true,
+        title: {
+          text: "Number of Births in the United States",
+        },
+        axisY: {
+          title: "No of Births (in Millions)",
+          labelFormatter: (e) => {
+            var suffixes = ["", "K", "M", "B"];
+            var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
+            if (order > suffixes.length - 1) order = suffixes.length - 1;
+            var suffix = suffixes[order];
+            return e.value / Math.pow(1000, order) + suffix;
+          },
+        },
+        data: [
+          {
+            type: "line",
+            xValueFormatString: "YYYY",
+            dataPoints: [],
+          },
+        ],
+      },
+      styleOptions: {
+        width: "100%",
+        height: "360px",
+      },
+    };
+  },
+  methods: {
+    parseDataAndRenderChart(url) {
+      $.getJSON(url, (response) => {
+        for (var i = 0; i < response.length; i++) {
+          this.options.data[0].dataPoints.push({
+            x: new Date(response[i]["year"], 0, 1),
+            y: response[i]["birth-number"],
+          });
+        }
+        this.chart.render();
+      });
+    },
+    chartInstance(chart) {
+      this.chart = chart;
+      this.parseDataAndRenderChart(
+        "https://canvasjs.com/data/gallery/vuejs/birth-rate-usa.json"
+      );
+    },
+  },
+};
+</script>
