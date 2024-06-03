@@ -54,3 +54,62 @@ body {
 }
 
 </style>
+<script>
+
+import AiService from "@/services/ai.service";
+import {useUserStore} from "@/stores/user";
+export default {
+    components: {
+      AiService,
+      // useUserStore
+    },
+    data() {
+        const userStore = useUserStore();
+        return {
+          user:{},
+          result: {},
+          message: '',
+          userStore,
+        };
+    },
+    
+    watch: {
+    },
+    computed: {
+
+    },
+    methods: {
+      async signin(data){
+        try{
+          this.result = await this.userStore.signIn(data.username,data.password);
+          console.log("localStorage info!!");
+          console.log(localStorage.user);
+          let checkAdmin = 0;
+          for ( let i = 0; i < this.userStore.user.roles.length; i++ ){
+            console.log(this.userStore.user.roles[i])
+            if(this.userStore.user.roles[i] == "ROLE_ADMIN"){
+              checkAdmin = 1;
+            }
+          }
+          if( checkAdmin == 1){
+            this.$router.push({
+              name: "admin.Dashboard",
+            });
+          }else {
+            this.message = "permission denial!"
+          }
+
+          
+        }catch(err){
+          console.log(err);
+          console.log(err.response.data.message)
+          // alert(err.response.data.message)
+          this.message = "sai thông tin tài khoản hoặc mật khẩu"
+        }
+      }
+    },
+    mounted() {
+        
+      },
+};
+</script>

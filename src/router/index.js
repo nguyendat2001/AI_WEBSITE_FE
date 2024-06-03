@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import { userAccStore } from "@/Store/user.store";
+// import { userAccStore } from "@/Store/user";
 
 const routes = [
     
@@ -43,16 +43,16 @@ const router = createRouter({
     routes,
   });
   
-router.beforeEach((to, from, next) => {
-    const userStore = userAccStore();
-    let value = localStorage.user;
-    if (!userStore.user && to.name != "login" && to.name != "register") {
-      next({
-        path: "/login",
-        replace: true,
-      });
-    }
-    next();
-});
+// router.beforeEach((to, from, next) => {
+//     const userStore = userAccStore();
+//     let value = localStorage.user;
+//     if (!userStore.user && to.name != "login" && to.name != "register") {
+//       next({
+//         path: "/login",
+//         replace: true,
+//       });
+//     }
+//     next();
+// });
 
 export default router;
