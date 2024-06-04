@@ -29,40 +29,40 @@
                   <div id="reportsChart"></div>
                   <form class="row g-3" >
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="bedrooms" v-model="this.house_price_data.bedrooms" />
+                      <input type="number" min="1" class="form-control" placeholder="bedrooms" v-model="this.house_price_data.bedrooms" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="bathrooms" v-model="this.house_price_data.bathrooms " />
+                      <input type="number" min="1" class="form-control" placeholder="bathrooms" v-model="this.house_price_data.bathrooms " />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="sqft_living" v-model="this.house_price_data.sqft_living" />
+                      <input type="number" min="1" class="form-control" placeholder="sqft_living" v-model="this.house_price_data.sqft_living" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="sqft_lot" v-model="this.house_price_data.sqft_lot" />
+                      <input type="number" min="1" class="form-control" placeholder="sqft_lot" v-model="this.house_price_data.sqft_lot" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="view" v-model="this.house_price_data.view" />
+                      <input type="number" min="1" class="form-control" placeholder="view" v-model="this.house_price_data.view" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="floors" v-model="this.house_price_data.floors" />
+                      <input type="number" min="1" class="form-control" placeholder="floors" v-model="this.house_price_data.floors" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="grade" v-model="this.house_price_data.grade" />
+                      <input type="number" min="1" class="form-control" placeholder="grade" v-model="this.house_price_data.grade" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="sqft_above" v-model="this.house_price_data.sqft_above" />
+                      <input type="number" min="1" class="form-control" placeholder="sqft_above" v-model="this.house_price_data.sqft_above" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="sqft_basement" v-model="this.house_price_data.sqft_basement" />
+                      <input type="number" min="1" class="form-control" placeholder="sqft_basement" v-model="this.house_price_data.sqft_basement" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="yr_built" v-model="this.house_price_data.yr_built" />
+                      <input type="number" min="1" class="form-control" placeholder="yr_built" v-model="this.house_price_data.yr_built" />
                     </div>
                     <div class="col-md-2">
-                      <input type="number" class="form-control" placeholder="zipcode" v-model="this.house_price_data.zipcode" />
+                      <input type="number" min="1" class="form-control" placeholder="zipcode" v-model="this.house_price_data.zipcode" />
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-primary" @click="this.HousePrice_Predict(this.house_price_data)">Predict</button>
+                        <button type="button" class="btn btn-outline-primary" @click="this.HousePrice_Predict(this.house_price_data)">Predict</button>
                     </div>
                     <!-- <div class="text-center">
                       <button type="submit" class="btn btn-primary">Submit</button>
@@ -90,7 +90,7 @@
           <div>
             <div class="card info-card revenue-card">
               <div class="card-body d-flex justify-content-center">
-                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                <h5 class="card-title">House Price <span>|</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div
@@ -99,7 +99,7 @@
                     <i class="bi bi-currency-dollar"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>${{this.house_price_res}}</h6>
+                    <h6 v-if="this.house_price_res!=null">${{this.house_price_res.output}}</h6>
                     <span class="text-success small pt-1 fw-bold">8%</span>
                     <span class="text-muted small pt-2 ps-1">increase</span>
                   </div>
@@ -172,6 +172,8 @@
 
 <script>
 import AiService from "@/services/ai.service";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     components: {
       AiService,
@@ -192,8 +194,12 @@ export default {
     methods: {
       async HousePrice_Predict(data){
         try{
+          // console.log(data)
           this.house_price_res = await AiService.pricing_house_AI(data);
           console.log(this.house_price_res)
+          toast.success("predict housing price successfull!", {
+                    autoClose: 3000
+                });
         }catch(err){
           console.log(err)
         }
@@ -205,6 +211,9 @@ export default {
           console.log(formData)
           this.lung_disease_res = await AiService.covid_19_AI(formData);
           console.log(this.lung_disease_res)
+          toast.success("predict Lung disease successfull!", {
+                    autoClose: 3000
+                });
         }catch(err){
           console.log(err)
         }
