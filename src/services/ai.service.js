@@ -9,25 +9,25 @@ class AiService {
 
     async covid_19_AI(data) {
         return (await this.api.post('/lung_ai', data
-            // , {
-            //     headers: {
-            //         'Authorization': `Bearer ${user.accessToken}`,
-            //         "Content-Type": "multipart/form-data",
-            //         Accept: "application/json",
-            //     },
-            // }
+            , {
+                headers: {
+                    // 'Authorization': `Bearer ${user.accessToken}`,
+                    "Content-Type": "multipart/form-data",
+                    Accept: "application/json",
+                },
+            }
         )).data;
     }
 
     async pricing_house_AI(data) {
         return (await this.api.post('/pricing_house_ai', data
-        // , {
-        //     headers: {
-        //         'Authorization': `Bearer ${user.accessToken}`,
-        //         "Content-Type": "application/json",
-        //         Accept: "application/json",
-        //     },
-        // }
+        , {
+            headers: {
+                // 'Authorization': `Bearer ${user.accessToken}`,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+        }
         )).data;
     }
 

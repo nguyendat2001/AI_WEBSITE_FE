@@ -22,53 +22,52 @@
             <div class="col-12">
               <div class="card">
 
-
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Pricing House <span>| Prediction</span></h5>
 
                   <!-- Line Chart -->
                   <div id="reportsChart"></div>
-                  <form class="row g-3">
+                  <form class="row g-3" >
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="bedrooms" v-model="this.house_price_data.bedrooms" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="bathrooms" v-model="this.house_price_data.bathrooms " />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="sqft_living" v-model="this.house_price_data.sqft_living" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="sqft_lot" v-model="this.house_price_data.sqft_lot" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="view" v-model="this.house_price_data.view" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="floors" v-model="this.house_price_data.floors" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="grade" v-model="this.house_price_data.grade" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="sqft_above" v-model="this.house_price_data.sqft_above" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="sqft_basement" v-model="this.house_price_data.sqft_basement" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="yr_built" v-model="this.house_price_data.yr_built" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                      <input type="number" class="form-control" placeholder="zipcode" v-model="this.house_price_data.zipcode" />
                     </div>
                     <div class="col-md-2">
-                      <input type="text" class="form-control" placeholder="Zip" />
+                        <button type="submit" class="btn btn-outline-primary" @click="this.HousePrice_Predict(this.house_price_data)">Predict</button>
                     </div>
-                    <div class="text-center">
+                    <!-- <div class="text-center">
                       <button type="submit" class="btn btn-primary">Submit</button>
                       <button type="reset" class="btn btn-secondary">Reset</button>
-                    </div>
+                    </div> -->
                   </form>
                   <!-- End No Labels Form -->
                   <!-- End Line Chart -->
@@ -100,7 +99,7 @@
                     <i class="bi bi-currency-dollar"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>$3,264</h6>
+                    <h6>${{this.house_price_res}}</h6>
                     <span class="text-success small pt-1 fw-bold">8%</span>
                     <span class="text-muted small pt-2 ps-1">increase</span>
                   </div>
@@ -136,21 +135,25 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                  <h5 class="card-title">Covid-19 <span>| Lung-Infection-Prediction</span></h5>
                   <div class="">
                     <div class="row">
                       <div class="fileUploadInput col-10">
                         <label>✨ chọn file</label>
-                        <input   @change="onFileChange" type="file" />
+                        <input  ref="file"  @change="onFileChange" type="file" />
                         <button>+</button>
                       </div>
-                      <div class="col-2"> <button class="btn btn-primary mt-4">Submit</button></div>
+                      <div class="col-2"> <button class="btn btn-outline-primary btn-lg mt-4" @click="this.Lung_Disease_Predict()">Predict</button></div>
                     </div>
                     
                     <div class="mt-2 p-2 d-flex justify-content-evenly">
-                      <img src="" width="300"  height="300" alt="Paris"  class="img-thumbnail" >
-                      <img src="" width="300"  height="300" alt="Paris"  class="img-thumbnail" >
-                      <img src="" width="300"  height="300" alt="Paris"  class="img-thumbnail" >
+                      <img v-if="this.lung_disease_res != null" :src="'http://127.0.0.1:5000'+this.lung_disease_res.image" width="300"  height="300" alt="Paris"  class="img-thumbnail" >
+                      <img v-if="this.lung_disease_res != null" :src="'http://127.0.0.1:5000'+this.lung_disease_res.mask" width="300"  height="300" alt="Paris"  class="img-thumbnail" >
+                      <div class="image-container">
+                          <img v-if="this.lung_disease_res != null" :src="'http://127.0.0.1:5000'+this.lung_disease_res.image" width="300"  height="300" alt="Paris"  class="img-thumbnail image">
+                          <img v-if="this.lung_disease_res != null" :src="'http://127.0.0.1:5000'+this.lung_disease_res.mask" width="300"  height="300" alt="Paris"  class="img-thumbnail overlay">
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -176,7 +179,8 @@ export default {
     data() {
         return {
           house_price_data:{},
-          lung_disease_res:{},
+          lung_disease_res: null,
+          house_price_res:null,
         };
     },
     
@@ -186,12 +190,21 @@ export default {
 
     },
     methods: {
+      async HousePrice_Predict(data){
+        try{
+          this.house_price_res = await AiService.pricing_house_AI(data);
+          console.log(this.house_price_res)
+        }catch(err){
+          console.log(err)
+        }
+      },
       async Lung_Disease_Predict(){
         try{
           const formData = new FormData();
           formData.append('file',this.$refs.file.files[0]);
           console.log(formData)
           this.lung_disease_res = await AiService.covid_19_AI(formData);
+          console.log(this.lung_disease_res)
         }catch(err){
           console.log(err)
         }
@@ -274,4 +287,21 @@ export default {
         display: none
     }
 }
+
+.image-container {
+    position: relative;
+    display: inline-block; /* Đảm bảo phần tử cha coi ảnh là phần tử block */
+}
+
+.image {
+    display: block; /* Đảm bảo ảnh nằm trên một dòng */
+}
+
+.overlay {
+    position: absolute; /* Đặt ảnh overlay ở vị trí tuyệt đối */
+    top: 0;
+    left: 0;
+    opacity: 0.3; /* Điều chỉnh độ mờ của ảnh overlay */
+}
+
 </style>
